@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Bento Gallery Demo</title>
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Manrope', 'sans-serif'] },
+                    colors: {
+                        brand: '#8B6F47',
+                        'brand-light': '#A68B5B',
+                        'brand-dark': '#5C4A2E',
+                        cream: '#F5F0E8',
+                        warm: '#E8DDD0',
+                        charcoal: '#1A1A18',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0F0E0C;
+            color: #ffffff;
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F0E0C;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3D3529;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8B6F47;
+        }
+        .lightbox {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+    </style>
+</head>
+<body class="py-16">
+
+    <!-- ========== PORTFOLIO SECTION ========== -->
+    <section id="portfolio" class="w-full overflow-hidden py-16 sm:py-24">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <span class="text-xs font-bold uppercase tracking-widest text-brand">Our Portfolio</span>
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl mt-3">Curated Moments</h2>
+            <p class="mx-auto mt-4 max-w-2xl text-lg text-slate-400">
+                A collection of stunning landscapes and designs. Drag to explore, click to expand.
+            </p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap justify-center gap-3 mt-8 mb-10 px-4">
+            <button onclick="filterPortfolio('all')"
+                class="portfolio-filter active px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-brand/20 bg-brand text-white transition-all duration-300"
+                data-filter="all">All</button>
+            <button onclick="filterPortfolio('home')"
+                class="portfolio-filter px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-brand/10 bg-brand/5 text-slate-400 hover:bg-brand/10 hover:text-white transition-all duration-300"
+                data-filter="home">Home</button>
+            <button onclick="filterPortfolio('kitchen')"
+                class="portfolio-filter px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-brand/10 bg-brand/5 text-slate-400 hover:bg-brand/10 hover:text-white transition-all duration-300"
+                data-filter="kitchen">Kitchen</button>
+            <button onclick="filterPortfolio('bedroom')"
+                class="portfolio-filter px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-brand/10 bg-brand/5 text-slate-400 hover:bg-brand/10 hover:text-white transition-all duration-300"
+                data-filter="bedroom">Bedroom</button>
+            <button onclick="filterPortfolio('office')"
+                class="portfolio-filter px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest border border-brand/10 bg-brand/5 text-slate-400 hover:bg-brand/10 hover:text-white transition-all duration-300"
+                data-filter="office">Office</button>
+        </div>
+
+        <!-- Bento Drag Scroll Container -->
+        <div id="bentoContainer" class="relative mt-12 w-full overflow-x-auto cursor-grab active:cursor-grabbing select-none scroll-smooth" style="scrollbar-width: none; -ms-overflow-style: none;">
+            <div id="portfolioGrid" class="w-max grid grid-rows-2 auto-cols-[minmax(18rem,24rem)] grid-flow-col gap-4 px-4 md:px-8 py-4 h-[32rem]">
+                
+                <!-- 1. Modern Living Room (HOME) - LARGE -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-6 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:col-span-2 md:row-span-2"
+                    data-category="home" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Modern Living Room Delhi">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Residential</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Modern Living Room â€” Delhi</h3>
+                        <p class="text-sm text-white/80 mt-1">Spacious & cozy residential layout with customized design elements.</p>
+                    </div>
+                </div>
+
+                <!-- 2. Modular Kitchen (KITCHEN) - SMALL -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-5 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:row-span-1"
+                    data-category="kitchen" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Modular Kitchen Gurgaon">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Kitchen</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Modular Kitchen â€” Gurgaon</h3>
+                        <p class="text-xs text-white/80 mt-1">Smart layouts, premium hardware, and ergonomic styling.</p>
+                    </div>
+                </div>
+
+                <!-- 3. Master Bedroom (BEDROOM) - SMALL -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-5 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:row-span-1"
+                    data-category="bedroom" onclick="openLightbox(this)" tabindex="0">
+                    <img src="service_bedroom.png"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Master Bedroom Noida">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Bedroom</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Master Bedroom â€” Noida</h3>
+                        <p class="text-xs text-white/80 mt-1">Luxurious, relaxing retreat featuring bespoke paneling and lighting.</p>
+                    </div>
+                </div>
+
+                <!-- 4. Corporate Office (OFFICE) - TALL -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-6 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:row-span-2"
+                    data-category="office" onclick="openLightbox(this)" tabindex="0">
+                    <img src="service_office.png"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Corporate Office Dwarka">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Commercial</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Corporate Office â€” Dwarka</h3>
+                        <p class="text-sm text-white/80 mt-1">Productivity-focused workspace layout with high-end modular fittings.</p>
+                    </div>
+                </div>
+
+                <!-- 5. Luxury Apartment (HOME) - SMALL -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-5 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:row-span-1"
+                    data-category="home" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Luxury Apartment South Delhi">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Residential</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Luxury Apartment â€” South Delhi</h3>
+                        <p class="text-xs text-white/80 mt-1">Premium residential interior focusing on modern minimalist details.</p>
+                    </div>
+                </div>
+
+                <!-- 6. Contemporary Villa (HOME) - WIDE -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-6 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:col-span-2 md:row-span-1"
+                    data-category="home" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1617104678098-de229db51175?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Contemporary Villa Noida">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Residential</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Contemporary Villa â€” Noida</h3>
+                        <p class="text-sm text-white/80 mt-1">Bespoke luxury villa interiors featuring smart automation and elegant design.</p>
+                    </div>
+                </div>
+
+                <!-- 7. L-Shaped Kitchen (KITCHEN) - SMALL -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-5 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:row-span-1"
+                    data-category="kitchen" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1565183997392-2f6f122e5912?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="L-Shaped Kitchen Faridabad">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Kitchen</span>
+                        <h3 class="text-lg font-bold text-white mt-1">L-Shaped Kitchen â€” Faridabad</h3>
+                        <p class="text-xs text-white/80 mt-1">Space-saving modular setup with dual-tone cabinet finish.</p>
+                    </div>
+                </div>
+
+                <!-- 8. Kids Bedroom (BEDROOM) - TALL -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-6 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:row-span-2"
+                    data-category="bedroom" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Kids Bedroom Dwarka">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Bedroom</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Kids Bedroom â€” Dwarka</h3>
+                        <p class="text-sm text-white/80 mt-1">Playful, bright, and storage-efficient bedroom design for kids.</p>
+                    </div>
+                </div>
+
+                <!-- 9. Startup Office (OFFICE) - SMALL -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-5 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:row-span-1"
+                    data-category="office" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Startup Office Noida">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Commercial</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Startup Office â€” Noida</h3>
+                        <p class="text-xs text-white/80 mt-1">Co-working style layout featuring vibrant colors and active spaces.</p>
+                    </div>
+                </div>
+
+                <!-- 10. Reception Lobby (OFFICE) - WIDE -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-6 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:col-span-2 md:row-span-1"
+                    data-category="office" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Reception Lobby Gurgaon">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Commercial</span>
+                        <h3 class="text-xl font-bold text-white mt-1">Reception Lobby â€” Gurgaon</h3>
+                        <p class="text-sm text-white/80 mt-1">Elegant and welcoming corporate reception lobby design.</p>
+                    </div>
+                </div>
+
+                <!-- 11. Penthouse Lounge (HOME) - SMALL -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-5 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:row-span-1"
+                    data-category="home" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Penthouse Lounge Greater Noida">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Residential</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Penthouse Lounge â€” Greater Noida</h3>
+                        <p class="text-xs text-white/80 mt-1">Chic entertainment and dining space with premium lighting and materials.</p>
+                    </div>
+                </div>
+
+                <!-- 12. Open Kitchen (KITCHEN) - SMALL -->
+                <div class="portfolio-item group relative flex h-full cursor-pointer items-end overflow-hidden rounded-2xl border border-brand/10 bg-[#151412] p-5 shadow-sm transition-all duration-500 ease-in-out hover:shadow-lg hover:border-brand/40 md:row-span-1"
+                    data-category="kitchen" onclick="openLightbox(this)" tabindex="0">
+                    <img src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?w=800&q=80"
+                        class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Open Kitchen Delhi NCR">
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                    <div class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Kitchen</span>
+                        <h3 class="text-lg font-bold text-white mt-1">Open Kitchen â€” Delhi NCR</h3>
+                        <p class="text-xs text-white/80 mt-1">Modern open-concept kitchen highlighting seamless storage and counters.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== LIGHTBOX ========== -->
+    <div id="lightbox" class="lightbox fixed inset-0 z-[100] bg-[#0F0E0C]/90 flex items-center justify-center p-6" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors" onclick="closeLightbox()">
+            <span class="iconify text-3xl" data-icon="mdi:close"></span>
+        </button>
+        <img id="lightboxImg" src="" class="max-w-full max-h-[85vh] object-contain rounded-2xl" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- ========== JS SCRIPTS ========== -->
+    <script>
+        // Filtering functionality
+        function filterPortfolio(c) {
+            document.querySelectorAll('.portfolio-filter').forEach(b => {
+                b.classList.remove('bg-brand', 'text-white');
+                b.classList.add('bg-brand/5', 'text-slate-400');
+            });
+            const a = document.querySelector(`[data-filter="${c}"]`);
+            a.classList.remove('bg-brand/5', 'text-slate-400');
+            a.classList.add('bg-brand', 'text-white');
+            
+            document.querySelectorAll('.portfolio-item').forEach(i => {
+                i.style.display = (c === 'all' || i.dataset.category === c) ? '' : 'none';
+            });
+        }
+
+        // Drag to scroll functionality
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        window.isDragging = false;
+        let dragDistance = 0;
+
+        const bentoContainer = document.getElementById('bentoContainer');
+        
+        bentoContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            window.isDragging = false;
+            dragDistance = 0;
+            bentoContainer.classList.add('cursor-grabbing');
+            bentoContainer.classList.remove('cursor-grab');
+            startX = e.pageX - bentoContainer.offsetLeft;
+            scrollLeft = bentoContainer.scrollLeft;
+        });
+        
+        bentoContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+            bentoContainer.classList.remove('cursor-grabbing');
+            bentoContainer.classList.add('cursor-grab');
+        });
+        
+        bentoContainer.addEventListener('mouseup', () => {
+            isDown = false;
+            bentoContainer.classList.remove('cursor-grabbing');
+            bentoContainer.classList.add('cursor-grab');
+            setTimeout(() => {
+                window.isDragging = false;
+            }, 50);
+        });
+        
+        bentoContainer.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - bentoContainer.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            dragDistance = Math.abs(x - startX);
+            if (dragDistance > 5) {
+                window.isDragging = true;
+            }
+            bentoContainer.scrollLeft = scrollLeft - walk;
+        });
+
+        // Lightbox functionality
+        function openLightbox(el) {
+            if (window.isDragging) return;
+            document.getElementById('lightboxImg').src = el.querySelector('img').src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox() });
+    </script>
+</body>
+</html>
+
+
