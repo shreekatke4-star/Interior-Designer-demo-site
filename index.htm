@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Interior Decor — Modern Interior Design for Homes, Offices & Commercial Spaces</title>
+    <title>MAISON Decor — Modern Interior Design for Homes, Offices & Commercial Spaces</title>
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230F0E0C'/%3E%3Cg transform='translate(32,32) rotate(45)'%3E%3Crect x='-16' y='-16' width='32' height='32' rx='4' fill='%238B6F47'/%3E%3C/g%3E%3Cpath d='M22 32 L32 20 L42 32 L32 44 Z' fill='%230F0E0C' opacity='0.6'/%3E%3Cpath d='M26 32 L32 25 L38 32 L32 39 Z' fill='%23E8DDD0' opacity='0.9'/%3E%3C/svg%3E">
@@ -253,10 +253,81 @@
         .svc-card:hover img {
             transform: scale(1.08);
         }
+
+        /* loding page */
+.loader-logo{
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.15em;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards;
+}
+
+.loader-text{
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+}
+
+.loader-bar{
+    width: 220px;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    overflow: hidden;
+    margin: auto;
+}
+
+.loader-progress{
+    width: 0%;
+    height: 100%;
+    background: #B47A21;
+    animation: loadingBar 2s ease forwards;
+}
+
+@keyframes loadingBar{
+    from{
+        width:0%;
+    }
+    to{
+        width:100%;
+    }
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.loader-hide{
+    opacity:0;
+    visibility:hidden;
+    transition:all .8s ease;
+}
     </style>
 </head>
 
 <body class="bg-[#0F0E0C] text-white font-sans">
+
+    <!-- LOADER -->
+<div id="loader" class="fixed inset-0 z-[99999] bg-[#0F0E0C] flex items-center justify-center">
+    <div class="text-center">
+        <h1 class="loader-logo text-5xl md:text-7xl text-[#F8F5F0] mb-4">
+            MAISON DECOR
+        </h1>
+
+        <p class="loader-text text-[#B47A21] uppercase tracking-[0.4em] text-xs md:text-sm mb-8">
+            Designing Timeless Interiors
+        </p>
+
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+    </div>
+</div>
 
     <!-- ========== NAVIGATION ========== -->
     <nav id="navbar"
@@ -267,8 +338,8 @@
                     <span class="iconify text-white text-sm -rotate-45" data-icon="mdi:floor-plan"></span>
                 </div>
                 <div>
-                    <span class="font-bold text-base tracking-tight">Creative</span>
-                    <span class="font-light text-base tracking-tight text-brand ml-1">Interior Decor</span>
+                    <span class="font-bold text-base tracking-tight">MAISON</span>
+                    <span class="font-light text-base tracking-tight text-brand ml-1">Decor</span>
                 </div>
             </a>
             <div class="hidden lg:flex items-center gap-8">
@@ -314,7 +385,7 @@
     <!-- ========== HERO ========== -->
     <section class="relative h-screen min-h-[800px] flex items-center overflow-hidden">
         <div class="absolute inset-0">
-            <img src="hero_image.png" alt="Creative Interior Decor"
+            <img src="hero_image.png" alt="MAISON Decor"
                 class="w-full h-full object-cover object-center hero-bg-zoom">
         </div>
         <div class="absolute inset-0 bg-gradient-to-r from-[#0F0E0C]/93 via-[#0F0E0C]/65 to-[#0F0E0C]/20"></div>
@@ -331,31 +402,7 @@
                     <span class="text-xs font-bold uppercase tracking-widest shadow-2xl text-[#B47A21]">Award-Winning Interior
                         Design</span>
                 </div>
-                <h1
-
-                        class="text-4xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tighter leading-[0.95] mb-6 text-reveal-2 text-[#F8F5F0]"
-                        style="text-shadow: 2px 2px 14px rgba(0,0,0,0.8);">                   
-                                    Modern Interior<br>Design for<br>
-                  <span class="text-[#B47A21] font-semibold">
-                        Homes & Offices
-                        </span>
-                </h1>
-                <p class="text-lg md:text-xl text-[#E6E0D8] font-light leading-relaxed mb-10 max-w-lg text-reveal-3
-                    style="text-shadow: 2px 2px 7px rgba(0,0,0,0.8);">
-                    Transform your spaces into stunning, functional works of art. From concept to completion — we design
-                    interiors that inspire.</p>
-                <div class="flex flex-col sm:flex-row items-start gap-4 text-reveal-4">
-                    <a href="#contact"
-                        class="px-8 py-4 bg-brand counterhover:bg-brand-light text-[#2B1C10] text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-150 hover:scale-105 flex items-center gap-2">
-                        <span class="iconify" data-icon="mdi:calendar-check"></span> Book Free Consultation
-                    </a>
-                    <a href="https://wa.me/919717218294?text=Hi%20Creative%20Interior%20Decor!%20I'm%20interested%20in%20your%20interior%20design%20services."
-                        target="_blank"
-                        class="px-8 py-4 bg-[#235347] hover:bg-[#188A49] text-white text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-150 hover:scale-105 flex items-center gap-2
-                        style="text-shadow: 0 0 8px rgba(255,255,255,0.7);">
-                        <span class="iconify text-lg" data-icon="mdi:whatsapp"></span> WhatsApp Us
-                    </a>
-                </div>
+                    <h1 class="text-4xl md:text-6xl lg:text-[4.5rem] font-bold tracking-tighter leading-[0.95] mb-6 text-reveal-2 color-[#F8F5F0]"> Modern Interior<br>Design for<br> <span class="text-[#B47A21] font-semibold"> Homes & Offices </span> </h1> <p class="text-lg md:text-xl text-[#E6E0D8] font-light leading-relaxed mb-10 max-w-lg text-reveal-3"> Transform your spaces into stunning, functional works of art. From concept to completion — we design interiors that inspire.</p> <div class="flex flex-col sm:flex-row items-start gap-4 text-reveal-4 "> <a href="#contact" class="px-8 py-4 bg-brand counterhover:bg-brand-light text-[#2B1C10] text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-150 hover:scale-105 flex items-center gap-2"> <span class="iconify" data-icon="mdi:calendar-check"></span> Book Free Consultation </a> <a href="https://wa.me/919717218294?text=Hi%20Creative%20Interior%20Decor!%20I'm%20interested%20in%20your%20interior%20design%20services." target="_blank" class="px-8 py-4 bg-[#235347] hover:bg-[#188A49] text-white text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-150 hover:scale-105 flex items-center gap-2 style="text-shadow: 0 0 8px rgba(255,255,255,0.7);"> <span class="iconify text-lg" data-icon="mdi:whatsapp"></span> WhatsApp Us </a> </div>
                 <div class="mt-14 flex flex-wrap items-center gap-8 text-warm text-sm text-reveal-4">
                     <div class="flex items-center gap-2"><span class="iconify text-brand"
                             data-icon="mdi:check-decagram"></span><span>15+ Years Experience</span></div>
@@ -420,7 +467,7 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid md:grid-cols-2 gap-16 items-center reveal">
                 <div class="relative">
-                    <img src="service_office.png" alt="Creative Interior Decor Studio"
+                    <img src="service_office.png" alt="MAISON Decor Studio"
                         class="rounded-3xl w-full object-cover h-[550px]">
                     <div class="absolute -bottom-6 -left-6 bg-forest rounded-2xl p-6 text-center">
                         <div class="text-3xl font-bold text-white">15+</div>
@@ -432,7 +479,7 @@
                     <span class="text-xs font-bold uppercase tracking-widest text-brand">About Us</span>
                     <h2 class="text-3xl md:text-5xl font-bold tracking-tight mt-4">We Design Spaces<br>That Tell Your
                         Story</h2>
-                    <p class="text-warm/50 font-light mt-6 leading-relaxed">At Creative Interior Decor, we believe every
+                    <p class="text-warm/50 font-light mt-6 leading-relaxed">At MAISON Decor, we believe every
                         space has a soul waiting to be unveiled. With over 15 years of experience in residential,
                         commercial, and office interior design, we craft environments that blend aesthetics with
                         functionality.</p>
@@ -676,7 +723,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Residential</span>
-                            <h3 class="text-xl font-bold text-white mt-1">Modern Living Room â€” Delhi</h3>
+                            <h3 class="text-xl font-bold text-white mt-1">Modern Living Room - Delhi</h3>
                             <p class="text-sm text-white/80 mt-1">Spacious & cozy residential layout with customized
                                 design elements.</p>
                         </div>
@@ -694,7 +741,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Kitchen</span>
-                            <h3 class="text-lg font-bold text-white mt-1">Modular Kitchen â€” Gurgaon</h3>
+                            <h3 class="text-lg font-bold text-white mt-1">Modular Kitchen - Gurgaon</h3>
                             <p class="text-xs text-white/80 mt-1">Smart layouts, premium hardware, and ergonomic
                                 styling.</p>
                         </div>
@@ -712,7 +759,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Bedroom</span>
-                            <h3 class="text-lg font-bold text-white mt-1">Master Bedroom â€” Noida</h3>
+                            <h3 class="text-lg font-bold text-white mt-1">Master Bedroom - Noida</h3>
                             <p class="text-xs text-white/80 mt-1">Luxurious, relaxing retreat featuring bespoke paneling
                                 and lighting.</p>
                         </div>
@@ -730,7 +777,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Commercial</span>
-                            <h3 class="text-xl font-bold text-white mt-1">Corporate Office â€” Dwarka</h3>
+                            <h3 class="text-xl font-bold text-white mt-1">Corporate Office - Dwarka</h3>
                             <p class="text-sm text-white/80 mt-1">Productivity-focused workspace layout with high-end
                                 modular fittings.</p>
                         </div>
@@ -748,7 +795,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Residential</span>
-                            <h3 class="text-lg font-bold text-white mt-1">Luxury Apartment â€” South Delhi</h3>
+                            <h3 class="text-lg font-bold text-white mt-1">Luxury Apartment - South Delhi</h3>
                             <p class="text-xs text-white/80 mt-1">Premium residential interior focusing on modern
                                 minimalist details.</p>
                         </div>
@@ -766,7 +813,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Residential</span>
-                            <h3 class="text-xl font-bold text-white mt-1">Contemporary Villa â€” Noida</h3>
+                            <h3 class="text-xl font-bold text-white mt-1">Contemporary Villa - Noida</h3>
                             <p class="text-sm text-white/80 mt-1">Bespoke luxury villa interiors featuring smart
                                 automation and elegant design.</p>
                         </div>
@@ -784,7 +831,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Kitchen</span>
-                            <h3 class="text-lg font-bold text-white mt-1">L-Shaped Kitchen â€” Faridabad</h3>
+                            <h3 class="text-lg font-bold text-white mt-1">L-Shaped Kitchen - Faridabad</h3>
                             <p class="text-xs text-white/80 mt-1">Space-saving modular setup with dual-tone cabinet
                                 finish.</p>
                         </div>
@@ -802,7 +849,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Bedroom</span>
-                            <h3 class="text-xl font-bold text-white mt-1">Kids Bedroom â€” Dwarka</h3>
+                            <h3 class="text-xl font-bold text-white mt-1">Kids Bedroom - Dwarka</h3>
                             <p class="text-sm text-white/80 mt-1">Playful, bright, and storage-efficient bedroom design
                                 for kids.</p>
                         </div>
@@ -820,7 +867,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Commercial</span>
-                            <h3 class="text-lg font-bold text-white mt-1">Startup Office â€” Noida</h3>
+                            <h3 class="text-lg font-bold text-white mt-1">Startup Office - Noida</h3>
                             <p class="text-xs text-white/80 mt-1">Co-working style layout featuring vibrant colors and
                                 active spaces.</p>
                         </div>
@@ -838,7 +885,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Commercial</span>
-                            <h3 class="text-xl font-bold text-white mt-1">Reception Lobby â€” Gurgaon</h3>
+                            <h3 class="text-xl font-bold text-white mt-1">Reception Lobby - Gurgaon</h3>
                             <p class="text-sm text-white/80 mt-1">Elegant and welcoming corporate reception lobby
                                 design.</p>
                         </div>
@@ -856,7 +903,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Residential</span>
-                            <h3 class="text-lg font-bold text-white mt-1">Penthouse Lounge â€” Greater Noida</h3>
+                            <h3 class="text-lg font-bold text-white mt-1">Penthouse Lounge - Greater Noida</h3>
                             <p class="text-xs text-white/80 mt-1">Chic entertainment and dining space with premium
                                 lighting and materials.</p>
                         </div>
@@ -874,7 +921,7 @@
                         <div
                             class="relative z-10 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                             <span class="text-[10px] font-bold uppercase tracking-widest text-brand">Kitchen</span>
-                            <h3 class="text-lg font-bold text-white mt-1">Open Kitchen â€” Delhi NCR</h3>
+                            <h3 class="text-lg font-bold text-white mt-1">Open Kitchen - Delhi NCR</h3>
                             <p class="text-xs text-white/80 mt-1">Modern open-concept kitchen highlighting seamless
                                 storage and counters.</p>
                         </div>
@@ -1437,7 +1484,7 @@
                 </div>
             </div>
             <div class="border-t border-brand/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-warm/20 text-xs">© 2025 Creative Interior Decor. All rights reserved.</p>
+                <p class="text-warm/20 text-xs">© 2025 MAISON Decor. All rights reserved.</p>
                 <p class="text-warm/20 text-xs">Designed with <span class="text-brand">♥</span> for beautiful spaces</p>
             </div>
         </div>
@@ -1541,8 +1588,14 @@
                     btn.innerHTML = '<span class="iconify" data-icon="mdi:send"></span> Send Enquiry';
                 });
         }
-        function bookViaWhatsApp() { const d = new FormData(document.getElementById('contactForm')); const m = `Hi Creative Interior Decor!\n\nName: ${d.get('name') || 'N/A'}\nPhone: ${d.get('phone') || 'N/A'}\nProject: ${d.get('project') || 'N/A'}\nMessage: ${d.get('message') || 'None'}`; window.open(`https://wa.me/919717218294?text=${encodeURIComponent(m)}`, '_blank') }
+        function bookViaWhatsApp() { const d = new FormData(document.getElementById('contactForm')); const m = `Hi MAISON Decor!\n\nName: ${d.get('name') || 'N/A'}\nPhone: ${d.get('phone') || 'N/A'}\nProject: ${d.get('project') || 'N/A'}\nMessage: ${d.get('message') || 'None'}`; window.open(`https://wa.me/919717218294?text=${encodeURIComponent(m)}`, '_blank') }
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox() });
+
+        window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loader').classList.add('loader-hide');
+    }, 2200);
+});
     </script>
 </body>
 
